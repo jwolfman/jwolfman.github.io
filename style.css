@@ -1,0 +1,136 @@
+@font-face {
+    font-family: header;
+    src: url('fonts/showcard-gothic/SHOWG.TTF');
+}
+@font-face {
+    font-family: body;
+    src: url('fonts/myriad-pro-cufonfonts/MYRIADPRO-REGULAR.OTF');
+}
+html{
+    height: 100%;
+    overflow-y: hidden;
+}
+body{
+    color: maroon;/*#2b0062;*/
+    font-family: 'body';
+    height: 100%;
+    background-image: url(images/Cityscape.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'header';
+    font-style: italic;
+}
+#header{
+    height: 11%;
+}
+#source{
+    text-decoration-line: none;
+    color: maroon;/*#3b0072;*/
+    text-align: center;
+    margin-left: 33%;
+}
+#header p{
+    cursor: help;
+}
+#header>p{
+    margin-left: 40%;
+}
+#header h2{
+    display: inline;
+    margin-left: 25%;
+}
+#header #banner,#header #logo{
+    display: inline;
+    margin-left: 0px;
+}
+#header #banner{
+    float: right;
+    height: 75px;
+}
+#banner img{
+    height: 75px;
+}
+#logo img{
+    height: 75px;
+    float: left;
+}
+#guide{
+    cursor: help;
+    color: maroon;/*indigo;*/
+    text-align: center;
+    margin-left: 20%;
+    display: block;
+}
+#popup{
+    position: relative;
+    display: block;
+    z-index: 10;
+    background-color: lightblue;/*lavender;*/
+    width: 60%;
+    opacity: .95;
+    margin-left: 5%;
+}
+#holder{
+    border-style: outset;
+    border-width: 2px;
+    border-color: maroon/*indigo*/;
+    width:100%;
+    height:6%;
+    display: inline-flex;
+    position: relative;
+    background: linear-gradient(to right,
+        lightblue/*lavender*/ 0%,
+        transparent calc(50% - 0.81px),
+        maroon/*indigo*/ calc(50% - 0.8px),
+        maroon/*indigo*/ calc(50% + 0.8px),
+        transparent calc(50% + 0.81px),
+        lightblue/*lavender*/ 100%);
+}
+#settings,#results{
+    width: 50%;
+    display: relative;
+}
+#settings input{
+    display: inline;
+    width: 30px;
+}
+#settings h3{
+    display: inline;
+    margin: 0px;
+}
+#results h3,#results p,.NPC *,.minion *{
+    display: inline;
+}
+input.PL,input.number{
+    width:30px;
+}
+#composition{
+    border-style: outset;
+    border-top-style: none;
+    border-width: 2px;
+    border-color: maroon/*indigo*/;
+    width: 100%;
+    min-height: 81%;
+    max-height: 81%;
+    display: flex;
+    margin-right: 0px;
+    position: relative;
+    background: linear-gradient(to right,
+        lightblue/*lavender*/ 0%,
+        transparent calc(50% - 0.81px),
+        maroon/*indigo*/ calc(50% - 0.8px),
+        maroon/*indigo*/ calc(50% + 0.8px),
+        transparent calc(50% + 0.81px),
+        lightblue/*lavender*/ 100%);
+}
+#NPCBlock,#minionBlock{
+    width: 50%;
+    height: 20%;
+    max-height: 10%;
+    top:0px;
+}
+#NPC,#minion{
+    overflow-y: auto;
+}
