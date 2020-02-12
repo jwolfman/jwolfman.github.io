@@ -11,10 +11,10 @@ html{
     overflow-y: hidden;
 }
 body{
-    color: maroon;/*#2b0062;*/
+    color: lime;/*maroon;/*#2b0062;*/
     font-family: 'body';
     height: 100%;
-    background-image: url(images/Cityscape.png);
+    background-image: url(images/urban.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -27,7 +27,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 #source{
     text-decoration-line: none;
-    color: maroon;/*#3b0072;*/
+    color: lime;/*#3b0072;*/
     text-align: center;
     margin-left: 33%;
 }
@@ -58,7 +58,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 #guide{
     cursor: help;
-    color: maroon;/*indigo;*/
+    color: lime;/*indigo;*/
     text-align: center;
     margin-left: 20%;
     display: block;
@@ -67,7 +67,7 @@ h1,h2,h3,h4,h5,h6 {
     position: relative;
     display: block;
     z-index: 10;
-    background-color: lightblue;/*lavender;*/
+    background-color: lavender;
     width: 60%;
     opacity: .95;
     margin-left: 5%;
@@ -75,18 +75,18 @@ h1,h2,h3,h4,h5,h6 {
 #holder{
     border-style: outset;
     border-width: 2px;
-    border-color: maroon/*indigo*/;
+    border-color: lime/*indigo*/;
     width:100%;
     height:6%;
     display: inline-flex;
     position: relative;
     background: linear-gradient(to right,
-        lightblue/*lavender*/ 0%,
+        lavender 0%,
         transparent calc(50% - 0.81px),
-        maroon/*indigo*/ calc(50% - 0.8px),
-        maroon/*indigo*/ calc(50% + 0.8px),
+        lime/*indigo*/ calc(50% - 0.8px),
+        lime/*indigo*/ calc(50% + 0.8px),
         transparent calc(50% + 0.81px),
-        lightblue/*lavender*/ 100%);
+        lavender 100%);
 }
 #settings,#results{
     width: 50%;
@@ -110,7 +110,7 @@ input.PL,input.number{
     border-style: outset;
     border-top-style: none;
     border-width: 2px;
-    border-color: maroon/*indigo*/;
+    border-color: lime/*indigo*/;
     width: 100%;
     min-height: 81%;
     max-height: 81%;
@@ -118,12 +118,12 @@ input.PL,input.number{
     margin-right: 0px;
     position: relative;
     background: linear-gradient(to right,
-        lightblue/*lavender*/ 0%,
+        lavender 0%,
         transparent calc(50% - 0.81px),
-        maroon/*indigo*/ calc(50% - 0.8px),
-        maroon/*indigo*/ calc(50% + 0.8px),
+        lime/*indigo*/ calc(50% - 0.8px),
+        lime/*indigo*/ calc(50% + 0.8px),
         transparent calc(50% + 0.81px),
-        lightblue/*lavender*/ 100%);
+        lavender 100%);
 }
 #NPCBlock,#minionBlock{
     width: 50%;
@@ -133,4 +133,10 @@ input.PL,input.number{
 }
 #NPC,#minion{
     overflow-y: auto;
+}
+p{
+    color: darkgreen;
+}
+#holder h3{
+    color: darkgreen;
 }
