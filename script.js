@@ -25,7 +25,7 @@ function update(){
             var NPC=document.getElementsByClassName("NPC")[c];
             var ePL = parseFloat(NPC.childNodes[3].value);
             for(var i=0;i<NPC.childNodes[5].value;i++) {
-                if (ePL <= PL - 4) {
+                if (ePL == PL - 4) {
                     CR[0] += 1;
                     CR[1] += 1;
                 } else if (ePL <= PL - 2) {
@@ -50,8 +50,8 @@ function update(){
                     CR[0] += 14;
                     CR[1] += 19;
                 } else{
-                    CR[0] += 20;
-                    CR[1] += 20;
+                    CR[0] += Math.ceil(3.85056*Math.E**(.319568*(ePL-PL)));
+                    CR[1] += Math.ceil(4.24811*Math.E**(.373671*(ePL-PL)));
                 }
             }
         }
@@ -95,6 +95,9 @@ function update(){
             }else if(ePL<=PL){
                 CR[0]+=num;
                 CR[1]+=num;
+            }else{
+                CR[0]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
+                CR[1]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
             }
         }
     }
