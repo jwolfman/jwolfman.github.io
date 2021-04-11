@@ -24,6 +24,9 @@ function update(){
         for (var c=0;c<document.getElementsByClassName("NPC").length;c++) {
             var NPC=document.getElementsByClassName("NPC")[c];
             var ePL = parseFloat(NPC.childNodes[3].value);
+            if(NPC.childNodes[7].checked){
+                ePL+=2;
+            }
             for(var i=0;i<NPC.childNodes[5].value;i++) {
                 if (ePL == PL - 4) {
                     CR[0] += 1;
@@ -144,6 +147,12 @@ function add(type){
     numberBox.min=1;
     numberBox.value=1;
     numberBox.onchange=update();
+    var rapid=document.createElement("P");
+    rapid.innerHTML=" Rapid-Fire:";
+    var rapidBox=document.createElement("INPUT");
+    rapidBox.type="checkbox";
+    rapidBox.className="rapid";
+    numberBox.onchange=update();
     var remove=document.createElement("BUTTON");
     remove.innerHTML="Remove";
     NPC.appendChild(name);
@@ -152,6 +161,8 @@ function add(type){
     NPC.appendChild(PLBox);
     NPC.appendChild(number);
     NPC.appendChild(numberBox);
+    NPC.appendChild(rapid);
+    NPC.appendChild(rapidBox);
     NPC.appendChild(remove);
     document.getElementById(type).appendChild(NPC);
     remove.setAttribute("onclick","this.parentElement.parentElement.removeChild(this.parentElement)");
