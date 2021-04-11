@@ -161,8 +161,10 @@ function add(type){
     NPC.appendChild(PLBox);
     NPC.appendChild(number);
     NPC.appendChild(numberBox);
-    NPC.appendChild(rapid);
-    NPC.appendChild(rapidBox);
+    if(type=="NPC") {
+        NPC.appendChild(rapid);
+        NPC.appendChild(rapidBox);
+    }
     NPC.appendChild(remove);
     document.getElementById(type).appendChild(NPC);
     remove.setAttribute("onclick","this.parentElement.parentElement.removeChild(this.parentElement)");
