@@ -11,25 +11,29 @@ html{
     overflow-y: hidden;
 }
 body{
-    color: darkgreen;/*lime;/*maroon;/*#2b0062;*/
+    color: lavender;/*darkgreen;/*lime;/*maroon;/*#2b0062;*/
     font-family: 'body';
     height: 100%;
-    background-image: url(images/urban.jpg);
+    background-image: url(images/ECI_bg.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 h1,h2,h3,h4,h5,h6 {
     font-family: 'header';
     font-style: italic;
 }
 #header{
-    height: 11%;
+    height: 75px;
 }
-#source{
-    text-decoration-line: none;
-    color: darkgreen;/*lime;/*#3b0072;*/
-    text-align: center;
-    margin-left: 28%;
+#source,#rapid{
+    color: lavender;/*darkgreen;/*lime;/*#3b0072;*/
+    /*text-align: center;
+    /*margin-left: 28%;*/
+}
+#rapid{
+    display: block;
 }
 #header p{
     cursor: help;
@@ -38,8 +42,8 @@ h1,h2,h3,h4,h5,h6 {
     margin-left: 40%;
 }
 #header h2{
-    display: inline;
-    margin-left: 20%;
+    display: inline-block;
+    vertical-align: middle;
 }
 #header #banner,#header #logo{
     display: inline;
@@ -56,21 +60,27 @@ h1,h2,h3,h4,h5,h6 {
     height: 75px;
     float: left;
 }
+#side{
+    float: right;
+    width: 40%;
+    text-align: right;
+}
 #guide{
     cursor: help;
-    color: darkgreen;/*lime;/*indigo;*/
-    text-align: center;
-    margin-right: 10%;
+    color: lavender;/*darkgreen;/*lime;/*indigo;*/
+    /*text-align: center;
+    margin-right: 10%;*/
     display: block;
 }
 #popup{
-    position: relative;
+    position: absolute;
     display: block;
     z-index: 10;
     background-color: lavender;
+    float: left;
     width: 60%;
     opacity: .95;
-    margin-left: 25%;
+    transform: translateX(-65%);
 }
 #holder{
     border-style: outset;
@@ -80,13 +90,13 @@ h1,h2,h3,h4,h5,h6 {
     height:6%;
     display: inline-flex;
     position: relative;
-    background: linear-gradient(to right,
+    background: lavender;/*linear-gradient(to right,
         lavender 0%,
         transparent calc(50% - 0.81px),
-        darkgreen/*lime indigo*/ calc(50% - 0.8px),
-        darkgreen/*lime indigo*/ calc(50% + 0.8px),
+        darkgreen/*lime indigo*/ /*calc(50% - 0.8px),
+        darkgreen/*lime indigo*/ /*calc(50% + 0.8px),
         transparent calc(50% + 0.81px),
-        lavender 100%);
+        lavender 100%);*/
 }
 #settings,#results{
     width: 50%;
@@ -107,7 +117,7 @@ input.PL,input.number{
     width:30px;
 }
 #composition{
-    border-style: outset;
+    border-left-style: outset;
     border-top-style: none;
     border-width: 2px;
     border-color: darkgreen;/*lime/*indigo*/;
@@ -117,13 +127,13 @@ input.PL,input.number{
     display: flex;
     margin-right: 0px;
     position: relative;
-    background: linear-gradient(to right,
+    background: linear-gradient(to bottom,
         lavender 0%,
-        transparent calc(50% - 0.81px),
-        darkgreen/*lime indigo*/ calc(50% - 0.8px),
-        darkgreen/*lime indigo*/ calc(50% + 0.8px),
-        transparent calc(50% + 0.81px),
-        lavender 100%);
+        transparent 100%);/*calc(50% - 0.81px),
+        darkgreen/*lime indigo*/ /*calc(50% - 0.8px),
+        darkgreen/*lime indigo*/ /*calc(50% + 0.8px),
+        transparent calc(50% + 0.81px),*/
+        /*lavender 100%);*/
 }
 #NPCBlock,#minionBlock{
     width: 50%;

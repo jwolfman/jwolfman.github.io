@@ -170,7 +170,6 @@ function add(type){
     remove.setAttribute("onclick","this.parentElement.parentElement.removeChild(this.parentElement)");
 }
 function toggleTutorial(target){
-    console.log(target)
     if(target.childElementCount>0){
         target.removeChild(target.childNodes[1]);
         target.text="How to use this calculator";
