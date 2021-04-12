@@ -182,10 +182,10 @@ function toggleTutorial(target){
             " ranking.<br><br>"+
             "This calculator deviates from the danger ranking scale set out in the original formula. We have found" +
             " that it doesn't actually hold up well to play with characters who have defenses and offenses at cap" +
-            " for PL and that it is very common for new players and GMs to make the mistake of not capping those on" +
-            " PCs. We can only assume that the ranking system was made for such groups. That being said we do" +
-            " include the original scale in brackets following the numerical danger ranking. Furthermore we have" +
-            " explanations based on how we've found the rankings to translate in play as well as extending the" +
+            " for PL, and that it is very common for new players and GMs to make the mistake of not capping those on" +
+            " PCs. We can only assume that the ranking system was made for such groups. That being said, we do" +
+            " include the original scale in brackets following the numerical danger ranking. Furthermore, we have" +
+            " explanations based on how we've found the rankings to translate in play, as well as extending the" +
             " formula in both directions for NPCs and minions.<br><br>"+
             "No Danger: There is no possible way that the PCs could be seriously threatened.<br>"+
             "Minimal Danger: The PCs have almost no chance of being defeated.<br>"+
@@ -193,9 +193,9 @@ function toggleTutorial(target){
             "Significant Danger: The PCs are likely to win the fight, but it will require smart play to come out on" +
             " top.<br>"+
             "Serious Danger: The PCs are going up against a real threat and could just as easily win as they could" +
-            " lose, and will need to play smart to win.<br>"+
-            "Severe Danger: The PCs are going to be outmatched and without very clever gameplay and teamwork," +
-            " they're more likely than not going to lose.<br>"+
+            " lose, and will need to play smart to win.<br>"
+            "Severe Danger: The PCs are going to be outmatched, and without very clever gameplay and teamwork," +
+            " they're more likely than not going to lose.<br>"
             "Overwhelming Danger: The PCs are very likely to lose the encounter, and only tremendous luck or playing" +
             " at the top of their game can see them through.";
         target.appendChild(p);
