@@ -81,6 +81,7 @@ h1,h2,h3,h4,h5,h6 {
     width: 60%;
     opacity: .95;
     transform: translateX(-65%);
+    text-align: center;
 }
 #holder{
     border-style: outset;

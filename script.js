@@ -176,7 +176,28 @@ function toggleTutorial(target){
     }else{
         var p=document.createElement("P");
         p.id="popup";
-        p.innerHTML="First set the PL of the party and the number of players then use the buttons to add or remove NPCs and minions and set their numbers and PLs. The calculator will calculate the CR and show the danger ranking of the encounter.";
+        p.innerHTML="First set the PL of the party and the number of players then use the buttons to add or remove" +
+            " NPCs and minions and set their numbers and PLs. The calculator will calculate the CR and show the" +
+            " danger ranking of the encounter, the danger ranking being more important to play than the challenge" +
+            " ranking.<br><br>"+
+            "This calculator deviates from the danger ranking scale set out in the original formula. We have found" +
+            " that it doesn't actually hold up well to play with characters who have defenses and offenses at cap" +
+            " for PL and that it is very common for new players and GMs to make the mistake of not capping those on" +
+            " PCs. We can only assume that the ranking system was made for such groups. That being said we do" +
+            " include the original scale in brackets following the numerical danger ranking. Furthermore we have" +
+            " explanations based on how we've found the rankings to translate in play as well as extending the" +
+            " formula in both directions for NPCs and minions.<br><br>"+
+            "No Danger: There is no possible way that the PCs could be seriously threatened.<br>"+
+            "Minimal Danger: The PCs have almost no chance of being defeated.<br>"+
+            "Modest Danger: The PCs stand to suffer some injuries if they're not careful.<br>"+
+            "Significant Danger: The PCs are likely to win the fight, but it will require smart play to come out on" +
+            " top.<br>"+
+            "Serious Danger: The PCs are going up against a real threat and could just as easily win as they could" +
+            " lose, and will need to play smart to win.<br>"+
+            "Severe Danger: The PCs are going to be outmatched and without very clever gameplay and teamwork," +
+            " they're more likely than not going to lose.<br>"+
+            "Overwhelming Danger: The PCs are very likely to lose the encounter, and only tremendous luck or playing" +
+            " at the top of their game can see them through.";
         target.appendChild(p);
     }
 }
@@ -184,19 +205,21 @@ function calc(CR,num){
     var DR=Math.floor(CR/num);
     switch(DR){
         case 0:
-            return " No Danger (0)";
         case 1:
-            return " Minimal Danger (1)";
         case 2:
-            return " Modest Danger (2)";
+            return " No Danger ("+DR+")";
         case 3:
-            return " Significant Danger (3)";
+            return " Minimal Danger ("+DR+")";
         case 4:
-            return " Serious Danger (4)";
+            return " Modest Danger ("+DR+")";
         case 5:
-            return " Severe Danger (5)";
+            return " Significant Danger ("+DR+")";
         case 6:
-            return " Overwhelming Danger (6)";
+            return " Serious Danger ("+DR+")";
+        case 7:
+            return " Severe Danger ("+DR+")";
+        case 8:
+            return " Overwhelming Danger ("+DR+")";
         default:
             return " Exceeds danger ranks ("+DR+")";
     }
