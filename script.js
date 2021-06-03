@@ -165,7 +165,7 @@ function add(type){
     tierDaze.innerHTML="Daze";
     tierBox.appendChild(tierDaze);
     var tierStag=document.createElement("OPTION");
-    tierStag.value=3;
+    tierStag.value=2;
     tierStag.innerHTML="Stagger";
     tierBox.appendChild(tierStag);
     var remove=document.createElement("BUTTON");
