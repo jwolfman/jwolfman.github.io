@@ -73,7 +73,7 @@ function update(){
         for (var c=0;c<document.getElementsByClassName("minion").length;c++) {
             var minion=document.getElementsByClassName("minion")[c];
             var ePL = parseFloat(minion.childNodes[3].value);
-            var num=parseFloat(minion.childNodes[5].value);
+            var num=parseFloat(minion.childNodes[5].value)*(parseFloat(minion.childNodes[7].value)+1);
             if(ePL<=PL-8){
                 CR[0]+=num/16;
                 CR[1]+=num/16;
@@ -152,7 +152,22 @@ function add(type){
     var rapidBox=document.createElement("INPUT");
     rapidBox.type="checkbox";
     rapidBox.className="rapid";
-    numberBox.onchange=update();
+    rapidBox.onchange=update();
+    var tier=document.createElement("P");
+    tier.innerHTML="Tier:";
+    var tierBox=document.createElement("SELECT");
+    var tierBruise=document.createElement("OPTION");
+    tierBruise.value=0;
+    tierBruise.innerHTML="Bruise";
+    tierBox.appendChild(tierBruise);
+    var tierDaze=document.createElement("OPTION");
+    tierDaze.value=1;
+    tierDaze.innerHTML="Daze";
+    tierBox.appendChild(tierDaze);
+    var tierStag=document.createElement("OPTION");
+    tierStag.value=3;
+    tierStag.innerHTML="Stagger";
+    tierBox.appendChild(tierStag);
     var remove=document.createElement("BUTTON");
     remove.innerHTML="Remove";
     NPC.appendChild(name);
@@ -164,6 +179,9 @@ function add(type){
     if(type=="NPC") {
         NPC.appendChild(rapid);
         NPC.appendChild(rapidBox);
+    }else{
+        NPC.appendChild(tier);
+        NPC.appendChild(tierBox);
     }
     NPC.appendChild(remove);
     document.getElementById(type).appendChild(NPC);
