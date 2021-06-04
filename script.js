@@ -24,8 +24,12 @@ function update(){
         for (var c=0;c<document.getElementsByClassName("NPC").length;c++) {
             var NPC=document.getElementsByClassName("NPC")[c];
             var ePL = parseFloat(NPC.childNodes[3].value);
-            if(NPC.childNodes[7].checked){
+            if(NPC.childNodes[7].checked){//check rapid-fire
                 ePL+=2;
+            }
+            if(NPC.childNodes[9].checked){//check ally
+                CR[0]*=-1;
+                CR[1]*=-1;
             }
             for(var i=0;i<NPC.childNodes[5].value;i++) {
                 if (ePL == PL - 4) {
@@ -57,6 +61,10 @@ function update(){
                     CR[1] += Math.ceil(4.24811*Math.E**(.373671*(ePL-PL)));
                 }
             }
+            if(NPC.childNodes[9].checked){//check ally
+                CR[0]*=-1;
+                CR[1]*=-1;
+            }
         }
     }
     /*
@@ -74,6 +82,10 @@ function update(){
             var minion=document.getElementsByClassName("minion")[c];
             var ePL = parseFloat(minion.childNodes[3].value);
             var num=parseFloat(minion.childNodes[5].value)*(parseFloat(minion.childNodes[7].value)+1);
+            if(NPC.childNodes[9].checked){//check ally
+                CR[0]*=-1;
+                CR[1]*=-1;
+            }
             if(ePL<=PL-8){
                 CR[0]+=num/16;
                 CR[1]+=num/16;
@@ -101,6 +113,10 @@ function update(){
             }else{
                 CR[0]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
                 CR[1]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
+            }
+            if(NPC.childNodes[9].checked){//check ally
+                CR[0]*=-1;
+                CR[1]*=-1;
             }
         }
     }
@@ -156,6 +172,7 @@ function add(type){
     var tier=document.createElement("P");
     tier.innerHTML="Tier:";
     var tierBox=document.createElement("SELECT");
+    tierBox.onchange=update();
     var tierBruise=document.createElement("OPTION");
     tierBruise.value=0;
     tierBruise.innerHTML="Bruise";
@@ -168,6 +185,12 @@ function add(type){
     tierStag.value=2;
     tierStag.innerHTML="Stagger";
     tierBox.appendChild(tierStag);
+    var ally=document.createElement("P");
+    ally.innerHTML="Ally:";
+    var allyBox=document.createElement("INPUT");
+    allyBox.type="checkbox";
+    allyBox.className="ally";
+    allyBox.onchange=update();
     var remove=document.createElement("BUTTON");
     remove.innerHTML="Remove";
     NPC.appendChild(name);
@@ -183,6 +206,8 @@ function add(type){
         NPC.appendChild(tier);
         NPC.appendChild(tierBox);
     }
+    NPC.appendChild(ally);
+    NPC.appendChild(allyBox);
     NPC.appendChild(remove);
     document.getElementById(type).appendChild(NPC);
     remove.setAttribute("onclick","this.parentElement.parentElement.removeChild(this.parentElement)");
