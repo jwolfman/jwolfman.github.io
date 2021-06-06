@@ -82,7 +82,7 @@ function update(){
             var minion=document.getElementsByClassName("minion")[c];
             var ePL = parseFloat(minion.childNodes[3].value);
             var num=parseFloat(minion.childNodes[5].value)*(parseFloat(minion.childNodes[7].value)+1);
-            if(NPC.childNodes[9].checked){//check ally
+            if(minion.childNodes[9].checked){//check ally
                 CR[0]*=-1;
                 CR[1]*=-1;
             }
@@ -114,7 +114,7 @@ function update(){
                 CR[0]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
                 CR[1]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
             }
-            if(NPC.childNodes[9].checked){//check ally
+            if(minion.childNodes[9].checked){//check ally
                 CR[0]*=-1;
                 CR[1]*=-1;
             }
