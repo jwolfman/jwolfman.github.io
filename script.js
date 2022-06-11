@@ -23,13 +23,17 @@ function update(){
     if(document.getElementsByClassName("NPC").length>0) {
         for (var c=0;c<document.getElementsByClassName("NPC").length;c++) {
             var NPC=document.getElementsByClassName("NPC")[c];
+            console.log(NPC.childNodes[8].value);
             var ePL = parseFloat(NPC.childNodes[3].value);
             if(NPC.childNodes[7].checked){//check rapid-fire
                 ePL+=2;
             }
-            if(NPC.childNodes[9].checked){//check ally
+            if(NPC.childNodes[8].value==2){//check ally
                 CR[0]*=-1;
                 CR[1]*=-1;
+            }else if(NPC.childNodes[8].value==1){//check neutral
+                CR[0]*=2;
+                CR[1]*=2;
             }
             for(var i=0;i<NPC.childNodes[5].value;i++) {
                 if (ePL == PL - 4) {
@@ -61,9 +65,12 @@ function update(){
                     CR[1] += Math.ceil(4.24811*Math.E**(.373671*(ePL-PL)));
                 }
             }
-            if(NPC.childNodes[9].checked){//check ally
+            if(NPC.childNodes[8].value==2){//check ally
                 CR[0]*=-1;
                 CR[1]*=-1;
+            }else if(NPC.childNodes[8].value==1){//check neutral
+                CR[0]/=2;
+                CR[1]/=2;
             }
         }
     }
@@ -82,9 +89,12 @@ function update(){
             var minion=document.getElementsByClassName("minion")[c];
             var ePL = parseFloat(minion.childNodes[3].value);
             var num=parseFloat(minion.childNodes[5].value)*(parseFloat(minion.childNodes[7].value)+1);
-            if(minion.childNodes[9].checked){//check ally
+            if(minion.childNodes[8].value==2){//check ally
                 CR[0]*=-1;
                 CR[1]*=-1;
+            }else if(minion.childNodes[8].value==1){//check neutral
+                CR[0]*=2;
+                CR[1]*=2;
             }
             if(ePL<=PL-8){
                 CR[0]+=num/16;
@@ -114,9 +124,12 @@ function update(){
                 CR[0]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
                 CR[1]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
             }
-            if(minion.childNodes[9].checked){//check ally
+            if(minion.childNodes[8].value==2){//check ally
                 CR[0]*=-1;
                 CR[1]*=-1;
+            }else if(minion.childNodes[8].value==1){//check neutral
+                CR[0]*=2;
+                CR[1]*=2;
             }
         }
     }
@@ -185,12 +198,26 @@ function add(type){
     tierStag.value=2;
     tierStag.innerHTML="Stagger";
     tierBox.appendChild(tierStag);
-    var ally=document.createElement("P");
+    /*var ally=document.createElement("P");
     ally.innerHTML="Ally:";
     var allyBox=document.createElement("INPUT");
     allyBox.type="checkbox";
     allyBox.className="ally";
-    allyBox.onchange=update();
+    allyBox.onchange=update();*/
+    var alignment=document.createElement("SELECT");
+    alignment.onchange=update();
+    var enemy=document.createElement("OPTION");
+    enemy.value=0;
+    enemy.innerHTML="Enemy";
+    alignment.appendChild(enemy);
+    var neutral=document.createElement("OPTION");
+    neutral.value=1;
+    neutral.innerHTML="Neutral";
+    alignment.appendChild(neutral);
+    var ally=document.createElement("OPTION");
+    ally.value=2;
+    ally.innerHTML="Ally";
+    alignment.appendChild(ally);
     var remove=document.createElement("BUTTON");
     remove.innerHTML="Remove";
     NPC.appendChild(name);
@@ -206,8 +233,9 @@ function add(type){
         NPC.appendChild(tier);
         NPC.appendChild(tierBox);
     }
-    NPC.appendChild(ally);
-    NPC.appendChild(allyBox);
+    //NPC.appendChild(ally);
+    NPC.appendChild(alignment)
+    //NPC.appendChild(allyBox);
     NPC.appendChild(remove);
     document.getElementById(type).appendChild(NPC);
     remove.setAttribute("onclick","this.parentElement.parentElement.removeChild(this.parentElement)");
