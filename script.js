@@ -128,8 +128,8 @@ function update(){
                 CR[0]*=-1;
                 CR[1]*=-1;
             }else if(minion.childNodes[8].value==1){//check neutral
-                CR[0]*=2;
-                CR[1]*=2;
+                CR[0]/=2;
+                CR[1]/=2;
             }
         }
     }
