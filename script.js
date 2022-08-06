@@ -23,7 +23,6 @@ function update(){
     if(document.getElementsByClassName("NPC").length>0) {
         for (var c=0;c<document.getElementsByClassName("NPC").length;c++) {
             var NPC=document.getElementsByClassName("NPC")[c];
-            console.log(NPC.childNodes[8].value);
             var ePL = parseFloat(NPC.childNodes[3].value);
             if(NPC.childNodes[7].checked){//check rapid-fire
                 ePL+=2;
@@ -133,6 +132,59 @@ function update(){
             }
         }
     }
+    if(document.getElementsByClassName("force").length) {
+        for (var c=0;c<document.getElementsByClassName("force").length;c++) {
+            var force=document.getElementsByClassName("force")[c];
+            var qPL=parseInt(force.childNodes[2].value)+3;
+            var size=parseInt(force.childNodes[4].value);
+            var ePL=qPL+size-1;
+            var num=parseInt(force.childNodes[6].value);
+            if(force.childNodes[7].value==2){//check ally
+                CR[0]*=-1;
+                CR[1]*=-1;
+            }else if(force.childNodes[7].value==1){//check neutral
+                CR[0]*=2;
+                CR[1]*=2;
+            }
+            for(var i=0;i<num;i++) {
+                if (ePL == PL - 4) {
+                    CR[0] += 1;
+                    CR[1] += 1;
+                } else if (ePL <= PL - 2) {
+                    CR[0] += 2;
+                    CR[1] += 2;
+                } else if (ePL == PL - 1) {
+                    CR[0] += 3;
+                    CR[1] += 3;
+                } else if (ePL == PL) {
+                    CR[0] += 4;
+                    CR[1] += 4;
+                } else if (ePL == PL + 1) {
+                    CR[0] += 5;
+                    CR[1] += 6;
+                } else if (ePL == PL + 2) {
+                    CR[0] += 7;
+                    CR[1] += 9;
+                } else if (ePL == PL + 3) {
+                    CR[0] += 10;
+                    CR[1] += 13;
+                } else if (ePL == PL + 4) {
+                    CR[0] += 14;
+                    CR[1] += 19;
+                } else{
+                    CR[0] += Math.ceil(3.85056*Math.E**(.319568*(ePL-PL)));
+                    CR[1] += Math.ceil(4.24811*Math.E**(.373671*(ePL-PL)));
+                }
+            }
+            if(force.childNodes[7].value==2){//check ally
+                CR[0]*=-1;
+                CR[1]*=-1;
+            }else if(force.childNodes[7].value==1){//check neutral
+                CR[0]/=2;
+                CR[1]/=2;
+            }
+        }
+    }
     CR[0]=Math.ceil(CR[0]);
     CR[1]=Math.ceil(CR[1]);
     var p= document.createElement("P");
@@ -158,52 +210,100 @@ function add(type){
     NPC.className=type;
     var name=document.createElement("P");
     name.innerHTML="Name:";
+    NPC.appendChild(name);
     var nameBox=document.createElement("INPUT");
     nameBox.type="text";
-    var PL=document.createElement("P");
-    PL.innerHTML=" PL:";
-    var PLBox=document.createElement("INPUT");
-    PLBox.type="number";
-    PLBox.className="PL";
-    PLBox.min=1;
-    PLBox.value=1;
-    PLBox.onchange=update();
-    var number=document.createElement("P");
-    number.innerHTML=" Number:";
-    var numberBox=document.createElement("INPUT");
-    numberBox.type="number";
-    numberBox.className="number";
-    numberBox.min=1;
-    numberBox.value=1;
-    numberBox.onchange=update();
-    var rapid=document.createElement("P");
-    rapid.innerHTML=" Rapid-Fire:";
-    var rapidBox=document.createElement("INPUT");
-    rapidBox.type="checkbox";
-    rapidBox.className="rapid";
-    rapidBox.onchange=update();
-    var tier=document.createElement("P");
-    tier.innerHTML="Tier:";
-    var tierBox=document.createElement("SELECT");
-    tierBox.onchange=update();
-    var tierBruise=document.createElement("OPTION");
-    tierBruise.value=0;
-    tierBruise.innerHTML="Bruise";
-    tierBox.appendChild(tierBruise);
-    var tierDaze=document.createElement("OPTION");
-    tierDaze.value=1;
-    tierDaze.innerHTML="Daze";
-    tierBox.appendChild(tierDaze);
-    var tierStag=document.createElement("OPTION");
-    tierStag.value=2;
-    tierStag.innerHTML="Stagger";
-    tierBox.appendChild(tierStag);
-    /*var ally=document.createElement("P");
-    ally.innerHTML="Ally:";
-    var allyBox=document.createElement("INPUT");
-    allyBox.type="checkbox";
-    allyBox.className="ally";
-    allyBox.onchange=update();*/
+    NPC.appendChild(nameBox);
+    if(type!="force") {
+        var PL=document.createElement("P");
+        PL.innerHTML=" PL:";
+        NPC.appendChild(PL);
+        var PLBox=document.createElement("INPUT");
+        PLBox.type="number";
+        PLBox.className="PL";
+        PLBox.min=1;
+        PLBox.value=1;
+        PLBox.onchange=update();
+        NPC.appendChild(PLBox);
+        var number=document.createElement("P");
+        number.innerHTML=" Number:";
+        NPC.appendChild(number);
+        var numberBox=document.createElement("INPUT");
+        numberBox.type="number";
+        numberBox.className="number";
+        numberBox.min=1;
+        numberBox.value=1;
+        numberBox.onchange=update();
+        NPC.appendChild(numberBox);
+        if (type == "NPC") {
+            var rapid=document.createElement("P");
+            rapid.innerHTML=" Rapid-Fire:";
+            NPC.appendChild(rapid);
+            var rapidBox=document.createElement("INPUT");
+            rapidBox.type="checkbox";
+            rapidBox.className="rapid";
+            rapidBox.onchange=update();
+            NPC.appendChild(rapidBox);
+        } else {
+            var tier=document.createElement("P");
+            tier.innerHTML="Tier:";
+            NPC.appendChild(tier);
+            var tierBox=document.createElement("SELECT");
+            tierBox.onchange=update();
+            var tierBruise=document.createElement("OPTION");
+            tierBruise.value=0;
+            tierBruise.innerHTML="Bruise";
+            tierBox.appendChild(tierBruise);
+            var tierDaze=document.createElement("OPTION");
+            tierDaze.value=1;
+            tierDaze.innerHTML="Daze";
+            tierBox.appendChild(tierDaze);
+            var tierStag=document.createElement("OPTION");
+            tierStag.value=2;
+            tierStag.innerHTML="Stagger";
+            tierBox.appendChild(tierStag);
+            NPC.appendChild(tierBox);
+        }
+    }else{
+        /*var quality=document.createElement("P");
+        quality.innerHTML="Quality:";
+        NPC.appendChild(quality);*/
+        var qBox=document.createElement("SELECT");
+        qBox.onchange=update();
+        var green=document.createElement("OPTION");
+        green.value=0;
+        green.innerHTML="Green";
+        qBox.appendChild(green);
+        var trained=document.createElement("OPTION");
+        trained.value=1;
+        trained.innerHTML="Trained";
+        qBox.appendChild(trained);
+        var veteran=document.createElement("OPTION");
+        veteran.value=2;
+        veteran.innerHTML="Veteran";
+        qBox.appendChild(veteran);
+        NPC.appendChild(qBox);
+        var size=document.createElement("P");
+        size.innerHTML="Size:";
+        NPC.appendChild(size);
+        var sizeBox=document.createElement("INPUT");
+        sizeBox.type="number";
+        sizeBox.className="number";
+        sizeBox.min=1;
+        sizeBox.value=1;
+        sizeBox.onchange=update();
+        NPC.appendChild(sizeBox);
+        var number=document.createElement("P");
+        number.innerHTML=" Number:";
+        NPC.appendChild(number);
+        var numberBox=document.createElement("INPUT");
+        numberBox.type="number";
+        numberBox.className="number";
+        numberBox.min=1;
+        numberBox.value=1;
+        numberBox.onchange=update();
+        NPC.appendChild(numberBox);
+    }
     var alignment=document.createElement("SELECT");
     alignment.onchange=update();
     var enemy=document.createElement("OPTION");
@@ -218,24 +318,9 @@ function add(type){
     ally.value=2;
     ally.innerHTML="Ally";
     alignment.appendChild(ally);
+    NPC.appendChild(alignment)
     var remove=document.createElement("BUTTON");
     remove.innerHTML="Remove";
-    NPC.appendChild(name);
-    NPC.appendChild(nameBox);
-    NPC.appendChild(PL);
-    NPC.appendChild(PLBox);
-    NPC.appendChild(number);
-    NPC.appendChild(numberBox);
-    if(type=="NPC") {
-        NPC.appendChild(rapid);
-        NPC.appendChild(rapidBox);
-    }else{
-        NPC.appendChild(tier);
-        NPC.appendChild(tierBox);
-    }
-    //NPC.appendChild(ally);
-    NPC.appendChild(alignment)
-    //NPC.appendChild(allyBox);
     NPC.appendChild(remove);
     document.getElementById(type).appendChild(NPC);
     remove.setAttribute("onclick","this.parentElement.parentElement.removeChild(this.parentElement)");

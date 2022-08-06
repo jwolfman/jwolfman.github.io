@@ -111,7 +111,7 @@ h1,h2,h3,h4,h5,h6 {
     display: inline;
     margin: 0px;
 }
-#results h3,#results p,.NPC *,.minion *{
+#results h3,#results p,.NPC *,.minion *, .force *{
     display: inline;
 }
 input.PL,input.number{
@@ -142,7 +142,7 @@ input.PL,input.number{
     max-height: 10%;
     top:0px;
 }
-#NPC,#minion{
+#NPC,#minion,#force{
     overflow-y: auto;
 }
 p{
