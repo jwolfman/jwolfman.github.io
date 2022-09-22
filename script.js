@@ -330,8 +330,10 @@ function toggleTutorial(target){
         target.removeChild(target.childNodes[1]);
         target.text="How to use this calculator";
     }else{
-        var p=document.createElement("P");
-        p.id="popup";
+        var d=document.createElement("div");
+        d.id="popup";
+        var p=document.createElement("p");
+        //p.className="popup";
         p.innerHTML="First set the PL of the party and the number of players then use the buttons to add or remove" +
             " NPCs and minions and set their numbers and PLs. The calculator will calculate the CR and show the" +
             " danger ranking of the encounter, the danger ranking being more important to play than the challenge" +
@@ -349,12 +351,27 @@ function toggleTutorial(target){
             "Significant Danger: The PCs are likely to win the fight, but it will require smart play to come out on" +
             " top.<br>"+
             "Serious Danger: The PCs are going up against a real threat and could just as easily win as they could" +
-            " lose, and will need to play smart to win.<br>"
+            " lose, and will need to play smart to win.<br>"+
             "Severe Danger: The PCs are going to be outmatched, and without very clever gameplay and teamwork," +
-            " they're more likely than not going to lose.<br>"
+            " they're more likely than not going to lose.<br>"+
             "Overwhelming Danger: The PCs are very likely to lose the encounter, and only tremendous luck or playing" +
-            " at the top of their game can see them through.";
-        target.appendChild(p);
+            " at the top of their game can see them through.<br><br>"+
+            "If you're using forces then you'll want to keep the following table in mind for the conversion of size" +
+            " to number of people.";
+        d.appendChild(p);
+        var t=document.createElement("table");
+        //t.className="popup";
+        t.innerHTML="<tr><th>UNIT TYPE</th><th>APPROX. NO. OF TROOPS</th><th>FORCE RANK</th></tr>"+
+            "<tr><td>Corps</td><td>20,000–50,000</td><td>14</td></tr>" +
+            "<tr><td>Division</td><td>9,000–15,000</td><td>13</td></tr>" +
+            "<tr><td>Brigade</td><td>6,000–8,000</td><td>12</td></tr>" +
+            "<tr><td>Regiment</td><td>3,000–4,000</td><td>11</td></tr>" +
+            "<tr><td>Battalion</td><td>500–1,000</td><td>9</td></tr>" +
+            "<tr><td>Company</td><td>140</td><td>7</td></tr>" +
+            "<tr><td>Platoon</td><td>30–50</td><td>5</td></tr>" +
+            "<tr><td>Squad</td><td>10</td><td>3</td></tr>";
+        d.appendChild(t);
+        target.appendChild(d);
     }
 }
 function calc(CR,num){

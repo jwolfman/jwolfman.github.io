@@ -82,6 +82,11 @@ h1,h2,h3,h4,h5,h6 {
     opacity: .95;
     transform: translateX(-65%);
     text-align: center;
+    overflow-y: hidden;
+}
+#popup p{
+    margin-top: 0;
+    margin-bottom: 0;
 }
 #holder{
     border-style: outset;
@@ -145,8 +150,12 @@ input.PL,input.number{
 #NPC,#minion,#force{
     overflow-y: auto;
 }
-p{
+p,table{
     color: #1ea71e;/*darkgreen;*/
+}
+table{
+    margin-left: auto;
+    margin-right: auto;
 }
 #holder h3{
     color: #1ea71e;/*darkgreen;*/
