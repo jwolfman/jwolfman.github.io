@@ -23,6 +23,7 @@ function update(){
     if(document.getElementsByClassName("NPC").length>0) {
         for (var c=0;c<document.getElementsByClassName("NPC").length;c++) {
             var NPC=document.getElementsByClassName("NPC")[c];
+            //enemy PL
             var ePL = parseFloat(NPC.childNodes[3].value);
             if(NPC.childNodes[7].checked){//check rapid-fire
                 ePL+=2;
@@ -38,7 +39,7 @@ function update(){
                 if (ePL == PL - 4) {
                     CR[0] += 1;
                     CR[1] += 1;
-                } else if (ePL <= PL - 2) {
+                } else if (ePL == PL - 2||ePL==PL-3) {
                     CR[0] += 2;
                     CR[1] += 2;
                 } else if (ePL == PL - 1) {
@@ -60,8 +61,18 @@ function update(){
                     CR[0] += 14;
                     CR[1] += 19;
                 } else{
-                    CR[0] += Math.ceil(3.85056*Math.E**(.319568*(ePL-PL)));
-                    CR[1] += Math.ceil(4.24811*Math.E**(.373671*(ePL-PL)));
+                    CR[0]+=3.92925*Math.E**(0.31336*(ePL-PL));
+                    if(ePL<PL-4){
+                        CR[1]+=3.92925*Math.E**(0.31336*(ePL-PL));
+                    }else {
+                        CR[1] += 4.32305 * Math.E ** (0.368479 * (ePL - PL));
+                    }
+                    //CR[0]+=Math.ceil(-0.00105445*Math.pow(ePL-PL,4) + 0.0426079*Math.pow(ePL-PL,3) +
+                    // 0.246156*Math.pow(ePL-PL,2) + 0.943992*(ePL-PL) + 3.84095);
+                    //CR[1]+=Math.ceil(-0.00261384*Math.pow(ePL-PL,4) + 0.0534417*Math.pow(ePL-PL,3) +
+                    // 0.411304*Math.pow(ePL-PL,2) + 1.38506*(ePL-PL) + 4.07624);
+                    //CR[0] += Math.ceil(3.85056*Math.E**(.319568*(ePL-PL)));
+                    //CR[1] += Math.ceil(4.24811*Math.E**(.373671*(ePL-PL)));
                 }
             }
             if(NPC.childNodes[8].value==2){//check ally
@@ -95,33 +106,33 @@ function update(){
                 CR[0]*=2;
                 CR[1]*=2;
             }
-            if(ePL<=PL-8){
+            if(ePL==PL-8){
                 CR[0]+=num/16;
                 CR[1]+=num/16;
-            }else if(ePL<=PL-7){
+            }else if(ePL==PL-7){
                 CR[0]+=num/12;
                 CR[1]+=num/12;
-            }else if(ePL<=PL-6){
+            }else if(ePL==PL-6){
                 CR[0]+=num/8;
                 CR[1]+=num/8;
-            }else if(ePL<=PL-5){
+            }else if(ePL==PL-5){
                 CR[0]+=num/6;
                 CR[1]+=num/6;
-            }else if(ePL<=PL-4){
+            }else if(ePL==PL-4){
                 CR[0]+=num/4;
                 CR[1]+=num/4;
-            }else if(ePL<=PL-3){
+            }else if(ePL==PL-3){
                 CR[0]+=num/3;
                 CR[1]+=num/3;
-            }else if(ePL<=PL-2){
+            }else if(ePL==PL-2){
                 CR[0]+=num/2;
                 CR[1]+=num/2;
-            }else if(ePL<=PL){
+            }else if(ePL==PL){
                 CR[0]+=num;
                 CR[1]+=num;
             }else{
-                CR[0]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
-                CR[1]+=Math.ceil(num/(1.03683*Math.E**(-.344073*(ePL-PL))));
+                CR[0]+=num/(1.03683*Math.E**(-.344073*(ePL-PL)));
+                CR[1]+=num/(1.03683*Math.E**(-.344073*(ePL-PL)));
             }
             if(minion.childNodes[8].value==2){//check ally
                 CR[0]*=-1;
@@ -135,6 +146,7 @@ function update(){
     if(document.getElementsByClassName("force").length) {
         for (var c=0;c<document.getElementsByClassName("force").length;c++) {
             var force=document.getElementsByClassName("force")[c];
+            //quality PL
             var qPL=parseInt(force.childNodes[2].value)+3;
             var size=parseInt(force.childNodes[4].value);
             var ePL=qPL+size-1;
@@ -150,7 +162,7 @@ function update(){
                 if (ePL == PL - 4) {
                     CR[0] += 1;
                     CR[1] += 1;
-                } else if (ePL <= PL - 2) {
+                } else if (ePL == PL - 2|| ePL==PL-3) {
                     CR[0] += 2;
                     CR[1] += 2;
                 } else if (ePL == PL - 1) {
@@ -172,8 +184,8 @@ function update(){
                     CR[0] += 14;
                     CR[1] += 19;
                 } else{
-                    CR[0] += Math.ceil(3.85056*Math.E**(.319568*(ePL-PL)));
-                    CR[1] += Math.ceil(4.24811*Math.E**(.373671*(ePL-PL)));
+                    CR[0] += 3.85056*Math.E**(.319568*(ePL-PL));
+                    CR[1] += 4.24811*Math.E**(.373671*(ePL-PL));
                 }
             }
             if(force.childNodes[7].value==2){//check ally
@@ -185,8 +197,8 @@ function update(){
             }
         }
     }
-    CR[0]=Math.ceil(CR[0]);
-    CR[1]=Math.ceil(CR[1]);
+    CR[0]=Math.round(CR[0]);
+    CR[1]=Math.round(CR[1]);
     var p= document.createElement("P");
     var diff=document.createElement("P");
     if(CR[0]==CR[1]){
