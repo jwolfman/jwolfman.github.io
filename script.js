@@ -143,6 +143,7 @@ function update(){
             }
         }
     }
+    //forces
     if(document.getElementsByClassName("force").length) {
         for (var c=0;c<document.getElementsByClassName("force").length;c++) {
             var force=document.getElementsByClassName("force")[c];
@@ -197,8 +198,29 @@ function update(){
             }
         }
     }
+    //challenges
+    if(document.getElementsByClassName("challenge").length){
+        for(var c=0;c<document.getElementsByClassName("challenge").length;c++){
+            var challenge=document.getElementsByClassName("challenge")[c];
+            var DC=challenge.childNodes
+            //check and toggle timed
+            if(challenge.childNodes[13].checked){//enable and calculate
+                challenge.childNodes[15].disabled=false;
+            }else{//disable if unchecked
+                challenge.childNodes[15].disabled=true;
+            }
+            //check and toggle penalties
+            if(challenge.childNodes[17].checked){//enable and calculate
+                challenge.childNodes[19].disabled=false;
+            }else{//disable if unchecked
+                challenge.childNodes[19].disabled=true;
+            }
+        }
+    }
+    //round CR
     CR[0]=Math.round(CR[0]);
     CR[1]=Math.round(CR[1]);
+    //calculate and display DR
     var p= document.createElement("P");
     var diff=document.createElement("P");
     if(CR[0]==CR[1]){
@@ -337,6 +359,114 @@ function add(type){
     document.getElementById(type).appendChild(NPC);
     remove.setAttribute("onclick","this.parentElement.parentElement.removeChild(this.parentElement)");
 }
+function addChallenge(){
+    var challenge=document.createElement("DIV");
+    challenge.className="challenge";
+    //name
+    var name=document.createElement("P");
+    name.innerHTML="Name:";
+    challenge.appendChild(name);
+    var nameBox=document.createElement("INPUT");
+    nameBox.type="text";
+    challenge.appendChild(nameBox);
+    //DC
+    var DC=document.createElement("P");
+    DC.innerHTML=" DC:";
+    challenge.appendChild(DC);
+    var DCBox=document.createElement("INPUT");
+    DCBox.type="number";
+    DCBox.className="DC";
+    DCBox.min=1;
+    DCBox.value=10;
+    DCBox.onchange=update();
+    challenge.appendChild(DCBox);
+    //successes
+    var successes=document.createElement("P");
+    successes.innerHTML="Successes/Degrees:";
+    challenge.appendChild(successes);
+    var successBox=document.createElement("INPUT");
+    successBox.type="number";
+    successBox.className="success";
+    successBox.min=1;
+    successBox.value=5;
+    successBox.onchange=update();
+    challenge.appendChild(successBox);
+    //binary success/fail
+    var binary=document.createElement("P");
+    binary.innerHTML="Pass/fail:";
+    challenge.appendChild(binary);
+    var binaryBox=document.createElement("INPUT");
+    binaryBox.type="checkbox";
+    binaryBox.className="binary";
+    binaryBox.onchange=update();
+    challenge.appendChild(binaryBox);
+    //failures
+    var failures=document.createElement("P");
+    failures.innerHTML="Degrees of failure:";
+    challenge.appendChild(failures);
+    var failureBox=document.createElement("INPUT");
+    failureBox.type="number";
+    failureBox.className="failure";
+    failureBox.min=1;
+    failureBox.value=3;
+    failureBox.onchange=update();
+    challenge.appendChild(failureBox);
+    //cumulative failure
+    var cumulative=document.createElement("P");
+    cumulative.innerHTML="Cumulative:";
+    challenge.appendChild(cumulative);
+    var cumulativeBox=document.createElement("INPUT");
+    cumulativeBox.type="checkbox";
+    cumulativeBox.className="cumulative";
+    cumulativeBox.onchange=update();
+    challenge.appendChild(cumulativeBox);
+    //time limit
+    var timed=document.createElement("P");
+    timed.innerHTML="Timed:";
+    challenge.appendChild(timed);
+    var timedBox=document.createElement("INPUT");
+    timedBox.type="checkbox";
+    timedBox.className="timed";
+    timedBox.onchange=update();
+    challenge.appendChild(timedBox);
+    var time=document.createElement("P");
+    time.innerHTML="Rounds/attempts:";
+    challenge.appendChild(time);
+    var timeBox=document.createElement("INPUT");
+    timeBox.type="number";
+    timeBox.className="time";
+    timeBox.min=1;
+    timeBox.value=5;
+    timeBox.disabled=true;
+    timeBox.onchange=update();
+    challenge.appendChild(timeBox);
+    //consequences and PL
+    var penalties=document.createElement("P");
+    penalties.innerHTML="Penalties:";
+    challenge.appendChild(penalties);
+    var penaltiesBox=document.createElement("INPUT");
+    penaltiesBox.type="checkbox";
+    penaltiesBox.className="penalties";
+    penaltiesBox.onchange=update();
+    challenge.appendChild(penaltiesBox);
+    var penalty=document.createElement("P");
+    penalty.innerHTML="PL:";
+    challenge.appendChild(penalty);
+    var penaltyBox=document.createElement("INPUT");
+    penaltyBox.type="number";
+    penaltyBox.className="PL";
+    penaltyBox.min=1;
+    penaltyBox.value=5;
+    penaltyBox.disabled=true;
+    penaltyBox.onchange=update();
+    challenge.appendChild(penaltyBox);
+    //remove
+    var remove=document.createElement("BUTTON");
+    remove.innerHTML="Remove";
+    challenge.appendChild(remove);
+    document.getElementById("challenge").appendChild(challenge);
+    remove.setAttribute("onclick","this.parentElement.parentElement.removeChild(this.parentElement)");
+}
 function toggleTutorial(target){
     if(target.childElementCount>0){
         target.removeChild(target.childNodes[1]);
@@ -408,4 +538,24 @@ function calc(CR,num){
         default:
             return " Exceeds danger ranks ("+DR+")";
     }
+}
+function openTab(evt, tabName) {
+    // Declare all variables
+    var i, tabContent, tabLinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabContent = document.getElementsByClassName("tabContent");
+    for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tabLinks = document.getElementsByClassName("tabLinks");
+    for (i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "flex";
+    evt.currentTarget.className += " active";
 }

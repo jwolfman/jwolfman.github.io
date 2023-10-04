@@ -56,6 +56,11 @@
                 <input type="number" min="1" value="5" id="size" onchange="update()">
             </div>
         </div>
+        <div class="tab">
+            <button class="tabLinks" onclick="openTab(event,'combat')">Combat
+            </button>
+            <button class="tabLinks" onclick="openTab(event,'challenges')">Challenges</button>
+        </div>
         <div id="results" class="holder">
             <div id="CR">
                 <h3>Challenge Rank: </h3>
@@ -66,7 +71,7 @@
             </div>
         </div>
     </div>
-    <div id="composition" class="holder">
+    <div id="combat" class="composition holder tabContent">
         <div id="NPCBlock">
             <button type="button" id="addNPC" onclick="add('NPC')">Add NPC</button>
             <button type="button" id="clearNPC" onclick="document.getElementById('NPC').innerHTML=''">Clear
@@ -85,5 +90,15 @@
             <div id="force"></div>
         </div>
     </div>
+    <div id="challenges" class="composition holder tabContent">
+        <div id="challengeBlock">
+            <button type="button" id="addChallenge" onclick="addChallenge()">Add Challenge</button>
+            <button type="button" id="clearChallenge" onclick="document.getElementById('challenge').innerHTML=''">Clear Challenges</button>
+            <div id="challenge"></div>
+        </div>
+    </div>
+    <script>
+        document.getElementsByClassName("tabLinks")[0].click();
+    </script>
 </body>
 </html>
