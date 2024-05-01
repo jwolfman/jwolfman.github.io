@@ -42,7 +42,7 @@
             proposed by Jackelope King</a-->
             <a id="rapid" href="https://greenronin.com/blog/2020/12/04/boom-with-a-capital-b-rapid-fire-villains/">On
                 Rapid-Fire Villains</a>
-            <a id="guide" onclick="toggleTutorial(this)">How to use this calculator</a>
+            <a id="guide" onclick="toggleTutorial(event, this)">How to use this calculator</a>
         </div>
     </div>
     <div id="holder">
@@ -57,9 +57,9 @@
             </div>
         </div>
         <div class="tab">
-            <button class="tabLinks" onclick="openTab(event,'combat')">Combat
+            <button class="tabLinks mechanics" onclick="openTab(event,'combat', 'mechanics')">Combat
             </button>
-            <button class="tabLinks" onclick="openTab(event,'challenges')">Challenges</button>
+            <button class="tabLinks mechanics" onclick="openTab(event,'challenges', 'mechanics')">Challenges</button>
         </div>
         <div id="results" class="holder">
             <div id="CR">
@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-    <div id="combat" class="composition holder tabContent">
+    <div id="combat" class="composition holder tabContent mechanics">
         <div id="NPCBlock">
             <button type="button" id="addNPC" onclick="add('NPC')">Add NPC</button>
             <button type="button" id="clearNPC" onclick="document.getElementById('NPC').innerHTML=''">Clear
@@ -90,7 +90,7 @@
             <div id="force"></div>
         </div>
     </div>
-    <div id="challenges" class="composition holder tabContent">
+    <div id="challenges" class="composition holder tabContent mechanics">
         <div id="challengeBlock">
             <button type="button" id="addChallenge" onclick="addChallenge()">Add Challenge</button>
             <button type="button" id="clearChallenge" onclick="document.getElementById('challenge').innerHTML=''">Clear Challenges</button>

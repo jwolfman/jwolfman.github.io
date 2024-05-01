@@ -98,6 +98,7 @@ function update(){
         for (var c=0;c<document.getElementsByClassName("minion").length;c++) {
             var minion=document.getElementsByClassName("minion")[c];
             var ePL = parseFloat(minion.childNodes[3].value);
+            //effective number of minions = number of minions*minion tier
             var num=parseFloat(minion.childNodes[5].value)*(parseFloat(minion.childNodes[7].value)+1);
             if(minion.childNodes[8].value==2){//check ally
                 CR[0]*=-1;
@@ -467,16 +468,36 @@ function addChallenge(){
     document.getElementById("challenge").appendChild(challenge);
     remove.setAttribute("onclick","this.parentElement.parentElement.removeChild(this.parentElement)");
 }
-function toggleTutorial(target){
+function toggleTutorial(evt, target){
     if(target.childElementCount>0){
-        target.removeChild(target.childNodes[1]);
-        target.text="How to use this calculator";
+        if(evt.target.tagName!="BUTTON") {
+            target.removeChild(target.childNodes[1]);
+            target.text = "How to use this calculator";
+        }
     }else{
         var d=document.createElement("div");
         d.id="popup";
-        var p=document.createElement("p");
+        var tabs=document.createElement("div");
+        tabs.className="tab";
+        tabs.id="rulesTabs";
+        var combat=document.createElement("button");
+        combat.className="tabLinks rules";
+        combat.onclick=function(){openTab(event, 'combatRules', 'rules')};
+        combat.innerHTML="Combat";
+        tabs.appendChild(combat);
+        var challenges=document.createElement("button");
+        challenges.className="tabLinks rules";
+        challenges.onclick=function(){openTab(event, 'challengeRules', 'rules')};
+        challenges.innerHTML="Challenges";
+        tabs.appendChild(challenges);
+        d.appendChild(tabs);
+        var combatRules=document.createElement("div");
+        combatRules.id="combatRules";
+        combatRules.className="tabContent rules";
+        var combatText=document.createElement("p");
         //p.className="popup";
-        p.innerHTML="First set the PL of the party and the number of players then use the buttons to add or remove" +
+        combatText.innerHTML="First set the PL of the party and the number of players then use the buttons to add or" +
+            " remove" +
             " NPCs and minions and set their numbers and PLs. The calculator will calculate the CR and show the" +
             " danger ranking of the encounter, the danger ranking being more important to play than the challenge" +
             " ranking.<br><br>"+
@@ -500,10 +521,9 @@ function toggleTutorial(target){
             " at the top of their game can see them through.<br><br>"+
             "If you're using forces then you'll want to keep the following table in mind for the conversion of size" +
             " to number of people.";
-        d.appendChild(p);
-        var t=document.createElement("table");
-        //t.className="popup";
-        t.innerHTML="<tr><th>UNIT TYPE</th><th>APPROX. NO. OF TROOPS</th><th>FORCE RANK</th></tr>"+
+        combatRules.appendChild(combatText);
+        var combatTable=document.createElement("table");
+        combatTable.innerHTML="<tr><th>UNIT TYPE</th><th>APPROX. NO. OF TROOPS</th><th>FORCE RANK</th></tr>"+
             "<tr><td>Corps</td><td>20,000–50,000</td><td>14</td></tr>" +
             "<tr><td>Division</td><td>9,000–15,000</td><td>13</td></tr>" +
             "<tr><td>Brigade</td><td>6,000–8,000</td><td>12</td></tr>" +
@@ -512,8 +532,19 @@ function toggleTutorial(target){
             "<tr><td>Company</td><td>140</td><td>7</td></tr>" +
             "<tr><td>Platoon</td><td>30–50</td><td>5</td></tr>" +
             "<tr><td>Squad</td><td>10</td><td>3</td></tr>";
-        d.appendChild(t);
+        combatRules.appendChild(combatTable);
+        d.appendChild(combatRules);
+        var challengeRules=document.createElement("div");
+        challengeRules.id="challengeRules";
+        challengeRules.className="tabContent rules";
+        var challengeText=document.createElement("p");
+        challengeText.innerHTML="This section is still under construction and will not impact end results yet.<br><br>"+
+            "Needed successes are based around number of PCs times 1.5. DCs are based on an assumption of a +0-+5" +
+            " bonus."
+        challengeRules.appendChild(challengeText);
+        d.appendChild(challengeRules);
         target.appendChild(d);
+        combat.click();
     }
 }
 function calc(CR,num){
@@ -539,23 +570,30 @@ function calc(CR,num){
             return " Exceeds danger ranks ("+DR+")";
     }
 }
-function openTab(evt, tabName) {
+function openTab(evt, tabName, section) {
     // Declare all variables
     var i, tabContent, tabLinks;
 
-    // Get all elements with class="tabcontent" and hide them
+    // Get all elements with class="tabcontent" and hide the ones in the section
     tabContent = document.getElementsByClassName("tabContent");
     for (i = 0; i < tabContent.length; i++) {
-        tabContent[i].style.display = "none";
+        if (tabContent[i].className.includes(section)) {
+            tabContent[i].style.display = "none";
+        }
     }
 
     // Get all elements with class="tablinks" and remove the class "active"
     tabLinks = document.getElementsByClassName("tabLinks");
     for (i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+        if (tabLinks[i].className.includes(section)) {
+            tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+        }
     }
 
     // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(tabName).style.display = "flex";
+    var disp="flex";
+    if(section=="rules")
+        disp="inline-block"
+    document.getElementById(tabName).style.display = disp;
     evt.currentTarget.className += " active";
 }

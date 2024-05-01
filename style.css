@@ -166,6 +166,10 @@ table{
 #holder h3{
     color: #1ea71e;/*darkgreen;*/
 }
+#rulesTabs{
+    display: inline-flex;
+    width: 25%;
+}
 .tab{
     overflow: hidden;
     /*border-left: 1px solid darkgreen;
